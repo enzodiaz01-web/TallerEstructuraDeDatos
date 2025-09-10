@@ -50,5 +50,8 @@ public:
 		void setSiguiente(NodoAlumno* siguiente) {
 			this->siguiente = siguiente;
 		}
+		void mostrarInfo() {
+			cout << "ID: " << id << " Nombre: " << nombre << " " << apellido << " Carrera: " << carrera << "Fecha ingreso" << fecha << endl;
+		}
 
 };
