@@ -9,7 +9,12 @@ struct NodoAlumno {
 };
 struct NodoCurso {
 	Curso* curso;
+	NodoNota* notas;
 	NodoCurso* siguiente;
+};
+struct NodoNota {
+	float nota;
+	NodoNota* siguiente;
 };
 void menu() {
 	int opcion = 0;

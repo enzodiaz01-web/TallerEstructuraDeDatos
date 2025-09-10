@@ -29,7 +29,7 @@ public:
 		return nombre;
 	}
 	int getCantEstudiantes() {
-		return cant_estudiantes;
+		return cantEstudiantes;
 	}
 	string getCarrera() {
 		return carrera;
@@ -37,8 +37,11 @@ public:
 	string getProfesor() {
 		return profesor;
 	}
-	Nodo* getSiguiente() {
+	NodoCurso* getSiguiente() {
 		return siguiente;
+	}
+	NodoAlumno* getAlumnosInscritos() {
+		return alumnosInscritos;
 	}
 	void setAlumnosInscritos(Nodo* Alumno) {
 		this->alumnosInscritos = alumnosInscritos;	

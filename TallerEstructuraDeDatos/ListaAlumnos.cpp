@@ -6,18 +6,18 @@ public:
 		cabeza = nullptr;
 	}
 	void agregarAlumno(Alumno* nuevo) {
-		NodoAlumnop* nodo = new NodoAlumno{ nuevo,nullptr };
+		NodoAlumno* nodo = new NodoAlumno(nuevo);
 		if (!cabeza) {
 			cabeza = nodo;
 		}
 		else {
 			NodoAlumno* aux = cabeza;
-			while (aux->siquiente) {
+			while (aux->siguiente) {
 				aux = aux->siguiente;
-				aux->siquyiente = nodo;
 			}
+			aux->siguiente = nodo;
 		}
-		coutr << "Alumno agregado";
+		cout << "Alumno agregado";
 	}
 	Alumno* buscarPorID(string id) {
 		NodoAlumno* aux = cabeza;
@@ -53,14 +53,13 @@ public:
 				if (aux2) {
 					aux2->siguiente = aux->siguiente;
 
-				}
-				else {
+				}else {
 					cabeza = aux->siguiente;
 				}
-				NodoCurso* curso = aux->alumno->getCursosIncretos();
+				NodoCurso* curso = aux->alumno->getCursosInscritos();
 				while (curso) {
-					NodoCurso* tmp = curos;
-					curso = curso->siquiente;
+					NodoCurso* tmp = curso;
+					curso = curso->siguiente;
 					delete tmp;
 				}
 				delete aux->alumno;
@@ -71,7 +70,7 @@ public:
 			aux2 = aux;
 			aux = aux->siguiente;
 		}
-		cont << "No se encontro alumno con ID: " << id << endl; \
+		cont << "No se encontro alumno con ID: " << id << endl; 
 	}
 	void MostrarTodo() {
 		NodoAlumno* aux = cabeza;
