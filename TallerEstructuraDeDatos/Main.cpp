@@ -3,12 +3,11 @@
 using namespace std;
 class Alumno;
 class Curso;
-
 struct NodoAlumno {
 	Alumno* alumno;
 	NodoAlumno* siguiente;
 };
-struct NodoCurso{
+struct NodoCurso {
 	Curso* curso;
 	NodoCurso* siguiente;
 };
