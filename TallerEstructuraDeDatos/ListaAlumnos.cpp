@@ -79,6 +79,8 @@ public:
 			aux = aux->siguiente;
 		}
 	}
+	//Seccion de Consultas y reportes 
+	// 1. Obtener todos los alumnos de una carrera
 	void obtenerAlumnosPorCarrera(dtring carrera) {
 		NodoAlumno* aux = cabeza;
 		bool encontrado = false;
@@ -95,6 +97,7 @@ public:
 			cout << "No se encontraron alumnos en la carrera: " << carrera << endl;
 		}
 	}
+	// 2. Obtener todos los cursos en los que un alumno está inscrito
 	void mostrarCursosDelAlumno(string id) {
 		Alumno* alumno = buscarPorID(id);
 		if(!alumno){
@@ -111,4 +114,7 @@ public:
 			curso = curso->siguiente;
 		}
 	}
+	// 3. Calcular el promedio de notas de un alumno en un curso
+	// 
+	// 4. Calcular el promedio general de un alumno
 };
