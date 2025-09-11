@@ -79,4 +79,36 @@ public:
 			aux = aux->siguiente;
 		}
 	}
+	void obtenerAlumnosPorCarrera(dtring carrera) {
+		NodoAlumno* aux = cabeza;
+		bool encontrado = false;
+		cout << "Alumnos de la carrera " << carrera << ":" << endl;
+		while (aux) {
+			if (aux->alumno->getCarrera() == carrera) {
+				aux->alumno->mostrarInfo();
+				encontrado = true;
+			}
+			aux = aux->siguiente;	
+
+		}
+		if(!encontrado) {
+			cout << "No se encontraron alumnos en la carrera: " << carrera << endl;
+		}
+	}
+	void mostrarCursosDelAlumno(string id) {
+		Alumno* alumno = buscarPorID(id);
+		if(!alumno){
+			return;
+		}
+		NodoCurso* curso = alumno->getCursosInscritos();
+		if(!curso){
+			cout << "El alumno no esta inscrito en ningun curso." << endl;
+			return;
+		}
+		cout << "Cursos en los que esta inscrito el alumno " << alumno->getNombre() << ":" << endl;
+		while (curso) {
+			cout << curso->curso->getNombre() << " (Codigo: " << curso->curso->getCodigo() << ")" << endl;
+			curso = curso->siguiente;
+		}
+	}
 };
