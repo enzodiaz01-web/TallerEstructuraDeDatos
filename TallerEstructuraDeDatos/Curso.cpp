@@ -22,6 +22,33 @@ public:
 		this->alumnosInscritos = nullptr;
 		this->siguiente = nullptr;
 	}
+	Curso* buscarPorID(string id) {
+		NodoCurso* aux = cabeza;
+		while (aux) {
+			if (aux->curso->getId() == id) {
+				aux->curso->mostrarInfo();
+				return aux->alumno;
+			}
+			aux = aux->siguiente;
+		}
+		cout << "No se encontro curso con el ID: " << id << endl;
+		return nullptr;
+	}
+	void buscarPorNombre(string nombre) {
+		NodoCurso* aux = cabeza;
+		bool encontrado = false;
+		while (aux) {
+			if (aux->curso->getNombre() == nombre) {
+				aux->curso->mostrarInfo();
+				encontrado = true;
+			}
+			aux = aux->siguiente;
+		}
+		if (!encontrado) {
+			cout << "No se encontro curso con el nombre: " << nombre << endl;
+		}
+	}
+
 	int getCodigo() {
 		return codigo;
 	}
@@ -48,6 +75,9 @@ public:
 	}
 	void setSiguiente(Nodo* siguiente) {
 		this->siguiente = siguiente;
+	}
+	void mostrarInfo() {
+		cout << "ID: " << id << " Nombre: " << nombre << "Cant. Estudiantes: " << cantEstudiantes << " Carrera: " << carrera << "Profesor: " << profesor << endl;
 	}
 
 }

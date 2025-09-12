@@ -19,6 +19,18 @@ public:
 		}
 		cout << "Alumno agregado";
 	}
+
+	bool existe(string id) {
+		NodoAlumno* aux = cabeza;
+		while (aux) {
+			if (aux->alumno->getId() == id) {
+				return true;
+			}
+			aux = aux->siguiente;
+		}
+		return false;
+	}
+
 	Alumno* buscarPorID(string id) {
 		NodoAlumno* aux = cabeza;
 		while (aux) {
