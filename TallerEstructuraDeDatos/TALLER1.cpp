@@ -526,6 +526,7 @@ int main() {
 		cout << "6. Consultas y Reportes" << endl;
 		cout << "0. Cerrar programa" << endl;
 		cout << "Ingrese una opcion: ";
+		cin >> opcion;
 		switch(opcion) {
 		case 1:menuAlumnos(listaAlumnos);	break;
 		case 2:menuCursos(listaCursos,listaAlumnos);break;
@@ -565,6 +566,7 @@ void menuAlumnos(ListaAlumnos& listaAlumnos) {
 		cout << "4. Eliminar Alumno" << endl;
 		cout << "5. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
+		cin >> opcion;
 		switch (opcion) {
 		case 1: {
 			string ID;
@@ -623,6 +625,7 @@ void menuCursos(ListaCursos& listaCursos, ListaAlumnos& listaAlumnos) {
 		cout << "4. Eliminar Curso" << endl;
 		cout << "5. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
+		cin >> opcion;
 		switch (opcion) {
 		case 1: {
 			int codigo;
