@@ -1,8 +1,10 @@
 class NodoCurso;
 class NodoAlumno;
+class Alumno;	
 #include <iostream>
 #include <string>
 using namespace std;
+
 class Curso {
 private:
 	int codigo;
@@ -22,6 +24,38 @@ public:
 		this->alumnosInscritos = nullptr;
 		this->siguiente = nullptr;
 	}
+	int getCodigo() {
+		return codigo;
+	}
+	string getNombre() {
+		return nombre;
+	}
+	int getCantEstudiantes() {
+		return cantEstudiantes;
+	}
+	string getCarrera() {
+		return carrera;
+	}
+	string getProfesor() {
+		return profesor;
+	}
+	NodoCurso* getSiguiente() {
+		return siguiente;
+	}
+	NodoAlumno* getAlumnosInscritos() {
+		return alumnosInscritos;
+	}
+	void setAlumnosInscritos(NodoAlumno* alumno) {
+		this->alumnosInscritos = alumno;
+	}
+	void setSiguiente(NodoCurso* siguiente) {
+		this->siguiente = siguiente;
+	}
+	void mostrarInfo() {
+		cout << "ID: " << id << " Nombre: " << nombre << "Cant. Estudiantes: " << cantEstudiantes << " Carrera: " << carrera << "Profesor: " << profesor << endl;
+	}
+
+	//Estos metodos van en otra parte
 	Curso* buscarPorID(string id) {
 		NodoCurso* aux = cabeza;
 		while (aux) {
@@ -49,35 +83,4 @@ public:
 		}
 	}
 
-	int getCodigo() {
-		return codigo;
-	}
-	string getNombre() {
-		return nombre;
-	}
-	int getCantEstudiantes() {
-		return cantEstudiantes;
-	}
-	string getCarrera() {
-		return carrera;
-	}
-	string getProfesor() {
-		return profesor;
-	}
-	NodoCurso* getSiguiente() {
-		return siguiente;
-	}
-	NodoAlumno* getAlumnosInscritos() {
-		return alumnosInscritos;
-	}
-	void setAlumnosInscritos(Nodo* Alumno) {
-		this->alumnosInscritos = alumnosInscritos;	
-	}
-	void setSiguiente(Nodo* siguiente) {
-		this->siguiente = siguiente;
-	}
-	void mostrarInfo() {
-		cout << "ID: " << id << " Nombre: " << nombre << "Cant. Estudiantes: " << cantEstudiantes << " Carrera: " << carrera << "Profesor: " << profesor << endl;
-	}
-
-}
+};

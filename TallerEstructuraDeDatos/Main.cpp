@@ -1,13 +1,15 @@
 #include <iostream>
 #include <string>
-#include ListaAlumnos.cpp
-#include Curso.cpp
-#include Alumno.cpp
-
 using namespace std;
+
 class Alumno;
 class Curso;
 class ListaAlumnos;
+
+struct NodoAlumno;
+struct NodoCurso;
+struct NodoNota;
+
 ListaAlumnos listaAlumnos;
 Curso curso;
 Alumno alumno;
@@ -54,7 +56,8 @@ void menuAlumnos() {
 				getline(cin, carrera);
 				cout << "Ingrese la fecha actual: ";
 				getline(cin, fecha);
-				Alumno p(ID, nombre, apellido, carrera, fecha);
+				Alumno* p= new Alumno(ID, nombre, apellido, carrera, fecha);
+				ListaAlumnos.agregar(p);
 				cout << "Alumno creado con exito: " << endl;
 				p->mostrarInfo;
 			}

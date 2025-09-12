@@ -1,6 +1,7 @@
 class NodoAlumno;
 class NodoCurso;
 class NodoNota;
+class Curso
 
 #include <iostream>
 #include <string>
@@ -13,7 +14,7 @@ private:
 		string apellido;
 		string carrera;
 		string fecha;
-		NodoCurso* cursosIncretos;
+		NodoCurso* cursosInscritos;
 		NodoAlumno* siguiente;
 public:
 	Alumno(string id, string nombre, string apellido, string carrera, string fecha) {
@@ -22,7 +23,7 @@ public:
 			this->apellido = apellido;
 			this->carrera = carrera;
 			this->fecha = fecha;
-			this->cursosIncretos = nullptr;
+			this->cursosInscritos = nullptr;
 			this->siguiente = nullptr;
 		}
 		string getId() {
@@ -40,14 +41,14 @@ public:
 		string getFecha() {
 			return fecha;
 		}
-		NodoCurso* getCursosIncretos() {
-			return cursosIncretos;
+		NodoCurso* getCursosInscritos() {
+			return cursosInscritos;
 		}
 		NodoAlumno* getSiguiente() {
 			return siguiente;
 		}
-		void setCursosIncretos(NodoCurso* cursosIncretos) {
-			this->cursosIncritos = cursosIncretos;
+		void setCursosInscritos(NodoCurso* cursosInscritos) {
+			this->cursosInscritos = cursosInscritos;
 		}
 		void setSiguiente(NodoAlumno* siguiente) {
 			this->siguiente = siguiente;
@@ -81,7 +82,7 @@ public:
 			cout << "El alumno no esta inscrito en el curso con codigo: " << codigoCurso << endl;
 		}
 		void registrarNotas(int codigoCurso, float nota) {
-			if (nota < 1.0 || nota>7.0) {
+			if (nota < 1.0 || nota> 7.0) {
 				cout << "Nota invalida, debe estar entre 1.0 y 7.0" << endl;
 				return;
 			}
