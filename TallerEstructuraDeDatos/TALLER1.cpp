@@ -100,7 +100,7 @@ public:
 		}
 	}
 	void mostrarInfo() {
-		cout << "Codigo: " << codigo << " Nombre: " << nombre << " Cantidad de Estudiantes: " << cantEstudiantes << " Carrera: " << carrera << " Profesor: " << profesor << endl;
+		cout << "|Codigo: " << codigo << " |Nombre: " << nombre << " |Cantidad de Estudiantes: " << cantEstudiantes << " |Carrera: " << carrera << " |Profesor: " << profesor << endl;
 	}
 };
 //Clase Alumno
@@ -151,7 +151,7 @@ public:
 		this->siguiente = siguiente;
 	}
 	void mostrarInfo() {
-		cout << "ID: " << id << " Nombre: " << nombre << " " << apellido << " Carrera: " << carrera << " Fecha ingreso: " << fecha << endl;
+		cout << "|ID: " << id << " |Nombre: " << nombre << " " << apellido << " |Carrera: " << carrera << " |Fecha ingreso: " << fecha << endl;
 	}
 //Manejo de Incripcion
 	void inscribirCurso(Curso* curso) {
@@ -207,12 +207,12 @@ public:
 					}
 					aux2->siguiente = nueva;
 				}
-				cout << "Nota " << nota << "registrada en curso " << aux->curso->getNombre() << endl;
+				cout << "Nota: " << nota << " registrada en el curso de " << aux->curso->getNombre() << endl;
 				return;
 			}
 			aux = aux->siguiente;
 		}
-		cout << "El alumno no esta inscrito en el curso con codigo: " << codigoCurso << endl;
+		cout << "El alumno no esta inscrito en el curso, con codigo: " << codigoCurso << endl;
 	}
 };
 //Clase ListaAlumnos
@@ -235,13 +235,13 @@ public:
 			}
 			aux->siguiente = nodo;
 		}
-		cout << "Alumno agregado" <<endl;
 	}
 	Alumno* buscarPorID(string id) {
 		NodoAlumno* aux = cabeza;
 		while (aux) {
 			if (aux->alumno->getId() == id) {
 				aux->alumno->mostrarInfo();
+				cout << "Alumno encontrado: " << endl;
 				return aux->alumno;
 			}
 			aux = aux->siguiente;
@@ -264,6 +264,7 @@ public:
 		bool encontrado = false;
 		while (aux) {
 			if (aux->alumno->getNombre() == nombre) {
+				cout << "Alumno encontrado: "<<endl;
 				aux->alumno->mostrarInfo();
 				encontrado = true;
 			}
@@ -443,12 +444,13 @@ public:
 		NodoCurso* aux = cabeza;
 		while (aux) {
 			if (aux->curso->getCodigo() == codigo) {
+				cout << "Curso encontrado: " << endl;
 				aux->curso->mostrarInfo();
 				return aux->curso;
 			}
 			aux = aux->siguiente;
 		}
-		cout << "No se encontro curso con ese codigo: " << codigo << endl;
+		cout << "No se encontro un curso con ese codigo: " << codigo << endl;
 		return nullptr;
 	}
 	void buscarPorNombre(string nombre) {
@@ -456,13 +458,14 @@ public:
 		bool encontrado = false;
 		while (aux) {
 			if (aux->curso->getNombre() == nombre) {
+				cout << "Curso encontrado: " << endl;
 				aux->curso->mostrarInfo();
 				encontrado = true;
 			}
 			aux = aux->siguiente;
 		}
 		if (!encontrado) {
-			cout << "No se encontro curso con el nombre: " << nombre << endl;
+			cout << "No se encontro un curso con ese nombre: " << nombre << endl;
 		}
 	}
 	void eliminarCurso(string codigo) {
@@ -484,7 +487,7 @@ public:
 				delete aux->curso;
 				delete aux;
 
-				cout << "Curso con codigo " << codigo << " eliminado." << endl;
+				cout << "El curso perteneciente a este codigo /" << codigo << "/ ha sido eliminado." << endl;
 				return;
 			}
 			aux2 = aux;
@@ -517,6 +520,7 @@ int main() {
 	ListaCursos listaCursos;
 	int opcion;
 	do {
+		cout << "\n----------------------------------------" << endl;	
 		cout << "Menu de opciones:" << endl;
 		cout << "1. Manejo de Alumnos" << endl;
 		cout << "2. Manejo de Cursos" << endl;
@@ -588,7 +592,7 @@ void menuAlumnos(ListaAlumnos& listaAlumnos) {
 				cout << "Ingrese la fecha actual: ";
 				getline(cin, fecha);
 				listaAlumnos.agregarAlumno(new Alumno(ID, nombre, apellido, carrera, fecha));
-				cout << "Alumno creado con exito: " << endl;
+				cout << "Alumno creado con exito " << endl;
 				break;
 			}
 			else {
