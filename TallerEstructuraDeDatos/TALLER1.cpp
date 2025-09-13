@@ -25,7 +25,7 @@ struct NodoNota {
 //Clase Curso
 class Curso {
 private:
-	int codigo;
+	string codigo;
 	string nombre;
 	int cantEstudiantes;
 	string carrera;
@@ -33,7 +33,7 @@ private:
 	NodoCurso* siguiente;
 	NodoAlumno* alumnosInscritos;
 public:
-	Curso(int codigo, string nombre, int cantEstudiantes, string carrera, string profesor) {
+	Curso(string codigo, string nombre, int cantEstudiantes, string carrera, string profesor) {
 		this->codigo = codigo;
 		this->nombre = nombre;
 		this->cantEstudiantes = cantEstudiantes;
@@ -42,7 +42,7 @@ public:
 		this->alumnosInscritos = nullptr;
 		this->siguiente = nullptr;
 	}
-	int getCodigo() {
+	string getCodigo() {
 		return codigo;
 	}
 	string getNombre() {
@@ -160,7 +160,7 @@ public:
 		curso->agregarAlumno(this);
 		cout << "Inscripcion al curso " << curso->getNombre() << " realizada con exito." << endl;
 	}
-	void eliminarInscripcion(int codigoCurso) {
+	void eliminarInscripcion(string codigoCurso) {
 		NodoCurso* aux = cursosInscritos;
 		NodoCurso* aux2 = nullptr;
 		while (aux) {
@@ -188,7 +188,7 @@ public:
 		cout << "El alumno no esta inscrito en el curso con codigo: " << codigoCurso << endl;
 	}
 //Manejo de Notas
-	void registrarNotas(int codigoCurso, float nota) {
+	void registrarNotas(string codigoCurso, float nota) {
 		if (nota < 1.0 || nota>7.0) {
 			cout << "Nota invalida, debe estar entre 1.0 y 7.0" << endl;
 			return;
@@ -352,7 +352,7 @@ public:
 			curso = curso->siguiente;
 		}
 	}
-	void promedioAlumnoEnCurso(string id, int codigoCurso) {
+	void promedioAlumnoEnCurso(string id, string codigoCurso) {
 		Alumno* alumno = buscarPorID(id);
 		if (!alumno) {
 			cout << "Alumno no encontrado." << endl;
@@ -439,7 +439,7 @@ public:
 		}
 		cout << "Curso agregado"<< endl;
 	}
-	Curso* buscarPorCodigo(int codigo) {
+	Curso* buscarPorCodigo(string codigo) {
 		NodoCurso* aux = cabeza;
 		while (aux) {
 			if (aux->curso->getCodigo() == codigo) {
@@ -465,7 +465,7 @@ public:
 			cout << "No se encontro curso con el nombre: " << nombre << endl;
 		}
 	}
-	void eliminarCurso(int codigo) {
+	void eliminarCurso(string codigo) {
 		NodoCurso* aux = cabeza;
 		NodoCurso* aux2 = nullptr;
 		while (aux) {
@@ -527,13 +527,14 @@ int main() {
 		cout << "0. Cerrar programa" << endl;
 		cout << "Ingrese una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch(opcion) {
 		case 1:menuAlumnos(listaAlumnos);	break;
 		case 2:menuCursos(listaCursos,listaAlumnos);break;
 		case 3:menuInscripcion(listaAlumnos, listaCursos);	break;
 		case 4: {
 			string idAlumno;
-			int codigoCurso;
+			string codigoCurso;
 			cout << "Ingrese el ID del alumno: ";
 			getline(cin, idAlumno);
 			cout << "Ingrese el codigo del curso: ";
@@ -564,9 +565,10 @@ void menuAlumnos(ListaAlumnos& listaAlumnos) {
 		cout << "2. Buscar Alumno por ID" << endl;
 		cout << "3. Buscar Alumno por Nombre" << endl;
 		cout << "4. Eliminar Alumno" << endl;
-		cout << "5. Volver al menu principal" << endl;
+		cout << "0. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (opcion) {
 		case 1: {
 			string ID;
@@ -623,18 +625,20 @@ void menuCursos(ListaCursos& listaCursos, ListaAlumnos& listaAlumnos) {
 		cout << "2. Buscar Curso por Codigo" << endl;
 		cout << "3. Buscar Curso por Nombre" << endl;
 		cout << "4. Eliminar Curso" << endl;
-		cout << "5. Volver al menu principal" << endl;
+		cout << "0. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (opcion) {
 		case 1: {
-			int codigo;
+			string codigo;
 			string nombre;
 			int cantEstudiantes;
 			string carrera;
 			string profesor;
 			cout << "Ingrese el codigo: ";
 			cin >> codigo;
+
 			if (!listaCursos.buscarPorCodigo(codigo)) {
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Ingrese el nombre: ";
@@ -656,7 +660,7 @@ void menuCursos(ListaCursos& listaCursos, ListaAlumnos& listaAlumnos) {
 			break;;
 		}
 		case 2: {
-			int codigo; cout << "Codigo: "; cin >> codigo;
+			string codigo; cout << "Codigo: "; cin >> codigo;
 			listaCursos.buscarPorCodigo(codigo);
 			break;
 		}
@@ -666,7 +670,7 @@ void menuCursos(ListaCursos& listaCursos, ListaAlumnos& listaAlumnos) {
 			break;
 		}
 		case 4: {
-			int codigo; cout << "Codigo: "; cin >> codigo;
+			string codigo; cout << "Codigo: "; cin >> codigo;
 			listaCursos.eliminarCurso(codigo);
 			break;
 		}
@@ -681,13 +685,14 @@ void menuInscripcion(ListaAlumnos& listaAlumnos, ListaCursos& listaCursos) {
 		cout << "\n--- Manejo de Inscripciones ---" << endl;
 		cout << "1. Inscribir Alumno a Curso" << endl;
 		cout << "2. Eliminar Inscripcion de Alumno a Curso" << endl;
-		cout << "3. Volver al menu principal" << endl;
+		cout << "0. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (opcion) {
 		case 1: {
 			string idAlumno;
-			int codigoCurso;
+			string codigoCurso;
 			cout << "Ingrese el ID del alumno: ";
 			getline(cin, idAlumno);
 			cout << "Ingrese el codigo del curso: ";
@@ -710,7 +715,7 @@ void menuInscripcion(ListaAlumnos& listaAlumnos, ListaCursos& listaCursos) {
 		}
 		case 2: {
 			string idAlumno;
-			int codigoCurso;
+			string codigoCurso;
 			cout << "Ingrese el ID del alumno: ";
 			getline(cin,idAlumno);
 			cout << "Ingrese el codigo del curso: ";
@@ -724,25 +729,26 @@ void menuInscripcion(ListaAlumnos& listaAlumnos, ListaCursos& listaCursos) {
 			}
 			break;
 		}
-		case 3: 
+		case 0: 
 			cout << "Volviendo al menu principal..." << endl; 
 			break;
 		default: cout << "Opcion invalida, intente de nuevo." << endl;
 		}
-	} while (opcion != 4);
+	} while (opcion != 0);
 }
 void menuNotas(ListaAlumnos& listaAlumnos) {
 	int opcion;
 	do {
 		cout << "\n--- Manejo de Notas ---" << endl;
 		cout << "1. Registrar Nota" << endl;
-		cout << "2. Volver al menu principal" << endl;
+		cout << "0. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (opcion) {
 		case 1: {
 			string id; 
-			int codigo; 
+			string codigo;
 			float nota;
 			cout << "Ingrese el ID del alumno: ";
 			getline(cin, id);
@@ -759,7 +765,7 @@ void menuNotas(ListaAlumnos& listaAlumnos) {
 			}
 			break;
 		}
-		case 2: 
+		case 0: 
 			cout << "Volviendo al menu principal..." << endl; 
 			break;
 		default: cout << "Opcion invalida, intente de nuevo.\n";
@@ -768,15 +774,16 @@ void menuNotas(ListaAlumnos& listaAlumnos) {
 }
 void menureportes(ListaAlumnos& listaAlumnos) {
 	int opcion = 0;
-	while (opcion != 4) {
+	do {
 		cout << "\n--- Consultas y Reportes ---" << endl;
 		cout << "1. Obtener Alumnos por Carrera" << endl;
 		cout << "2. Mostrar Cursos de un Alumno" << endl;
 		cout << "3. Promedio de un Alumno en un Curso" << endl;
 		cout << "4. Promedio General de un Alumno" << endl;
-		cout << "5. Volver al menu principal" << endl;
+		cout << "0. Volver al menu principal" << endl;
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		switch (opcion) {
 		case 1: {
 			string carrera;
@@ -794,7 +801,7 @@ void menureportes(ListaAlumnos& listaAlumnos) {
 		}
 		case 3: {
 			string idAlumno;
-			int codigoCurso;
+			string codigoCurso;
 			cout << "Ingrese el ID del alumno: ";
 			getline(cin, idAlumno);
 			cout << "Ingrese el codigo del curso: ";
@@ -814,5 +821,5 @@ void menureportes(ListaAlumnos& listaAlumnos) {
 			break;
 		default: cout << "Opcion invalida, intente de nuevo." << endl;
 		}
-	}
+	} while (opcion != 0);
 }
